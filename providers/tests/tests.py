@@ -60,3 +60,15 @@ class ProviderTest(TestCase):
             self.url, json.dumps(data), content_type='application/json').json()
         assert response['phone_number'][0] == \
             "Phone number must be entered in the format: '+999999999'"
+
+    def test_unique_provider(self):
+        data = {
+            'name': self.provider.name,
+            'email': 'test@gmail.com',
+            'phone_number': '+123456789',
+            'language': 'VN',
+            'currency': 'USD'
+        }
+        response = self.client.post(
+            self.url, json.dumps(data), content_type='application/json').json()
+        assert response['name'][0] == 'provider with this name already exists'

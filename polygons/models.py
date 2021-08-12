@@ -14,7 +14,7 @@ class Polygon(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True)
 
     class Meta:
-        unique_together = ['name', 'provider_id']
+        unique_together = ['name', 'provider']
 
     def __str__(self):
         return self.name
@@ -25,6 +25,7 @@ class Polygon(models.Model):
 
     @property
     def geo_field_indexing(self):
+        """return a dictionary of geo contains lat, lon"""
         return {
             'lat': self.geo['coordinates'][0],
             'lon': self.geo['coordinates'][1],

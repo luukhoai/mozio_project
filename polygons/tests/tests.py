@@ -62,3 +62,15 @@ class PolygonTest(TestCase):
         response = self.client.post(
             self.url, json.dumps(data), content_type='application/json').json()
         assert response['geo'] == 'Geo is invalid'
+
+    def test_unique_name_provider_id(self):
+        data = {
+            'name': self.polygon.name,
+            'price': 0.5,
+            'geo': {'type': 'Point', 'coordinates': [1.2, 2.3]},
+            'provider': self.provider.id
+        }
+        response = self.client.post(
+            self.url, json.dumps(data), content_type='application/json').json()
+        assert response['non_field_errors'][0] == \
+            'The fields name, provider must make a unique set.'
