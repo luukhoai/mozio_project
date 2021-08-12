@@ -12,8 +12,8 @@ class ProviderTest(TestCase):
     def test_get_provider(self):
         response = self.client.get(
             self.url, content_type='application/json').json()
-        assert len(response) == 1
-        assert response[0]['name'] == self.provider.name
+        assert response['count'] == 1
+        assert response['results'][0]['name'] == self.provider.name
 
     def test_create_provivder(self):
         data = {

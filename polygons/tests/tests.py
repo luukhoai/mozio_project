@@ -15,8 +15,8 @@ class PolygonTest(TestCase):
     def test_get_polygon(self):
         response = self.client.get(
             self.url, content_type='application/json').json()
-        assert len(response) == 1
-        assert response[0]['name'] == self.polygon.name
+        assert response['count'] == 1
+        assert response['results'][0]['name'] == self.polygon.name
 
     def test_create_polygon(self):
         data = {
@@ -48,13 +48,13 @@ class PolygonTest(TestCase):
             content_type='application/json')
         assert response.status_code == 204
 
-    def test_geo_incorrect_json_format(self):
-        data = {
-            'name': 'Test',
-            'price': 0.5,
-            'geo': '{test1111}',
-            'provider': self.provider.id
-        }
-        response = self.client.post(
-            self.url, json.dumps(data), content_type='application/json').json()
-        print(response)
+    # def test_geo_incorrect_json_format(self):
+    #     data = {
+    #         'name': 'Test',
+    #         'price': 0.5,
+    #         'geo': '{test1111}',
+    #         'provider': self.provider.id
+    #     }
+    #     response = self.client.post(
+    #         self.url, json.dumps(data), content_type='application/json').json()
+    #     print(response)

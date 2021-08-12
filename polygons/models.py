@@ -22,3 +22,10 @@ class Polygon(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify('{} {}'.format(self.name, self.provider.name))
         super(Polygon, self).save(*args, **kwargs)
+
+    @property
+    def geo_field_indexing(self):
+        return {
+            'lat': self.geo['coordinates'][0],
+            'lon': self.geo['coordinates'][1],
+        }
