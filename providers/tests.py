@@ -60,4 +60,5 @@ class ProviderTest(TestCase):
         }
         response = self.client.post(
             self.url, json.dumps(data), content_type='application/json').json()
-        assert response['phone_number'][0] == "Phone number must be entered in the format: '+999999999'"
+        assert response['phone_number'][0] == \
+            "Phone number must be entered in the format: '+999999999'"
