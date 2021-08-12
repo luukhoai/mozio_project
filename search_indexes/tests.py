@@ -1,16 +1,19 @@
 from django.test import TestCase
+from unittest.mock import patch
 from providers.tests.factories import ProviderFactory
 from polygons.tests.factories import PolygonFactory
+from search_indexes.documents.polygon import PolygonDocument
+from polygons.models import Polygon
 
 
 class SearchTest(TestCase):
 
     def setUp(self):
         self.url = '/search/polygon/'
-        self.provider = ProviderFactory()
-        self.polygon = PolygonFactory(provider=self.provider)
-
-    def test_search_poligon(self):
-        url = '{}?geo__geo_distance=100000km__12.04__-63.93'.format(self.url)
-        response = self.client.get(url).json()
-        assert response['count'] == 1
+        # self.polygon = Polygon(
+        #     name='Test', price=123, provider=self.provider,
+        #     geo={'type': 'Point', 'coordinates': [1.2, 2.3]})
+        self.polygon = PolygonFactory.build()
+        polygonDoc = PolygonDocument()
+        with patch('django_elasticsearch_dsl.documents.bulk') as mock:
+            polygonDoc.update(self.polygon)
