@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+mozio_project/settings/*
+!mozio_project/settings/__init__.py
+!mozio_project/settings/base.py
