@@ -30,19 +30,17 @@ class PolygonDocumentView(BaseDocumentViewSet):
     ]
     # Define search fields
     search_fields = (
-        'name',
-        'lat',
-        'lng'
+        'price',
     )
     # Define filter fields
     filter_fields = {
-        'name': 'name.raw'
+        'price': 'price'
     }
     # Define ordering fields
     ordering_fields = {
-        'name': 'name.raw'
+        'price': 'price'
     }
-    ordering = ('name',)
+    ordering = ('price',)
     geo_spatial_filter_fields = {
         'geo': {
             'lookups': [
@@ -50,7 +48,3 @@ class PolygonDocumentView(BaseDocumentViewSet):
             ],
         },
     }
-
-    def get_queryset(self):
-        queryset = super(PolygonDocumentView, self).get_queryset()
-        return queryset

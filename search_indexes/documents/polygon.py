@@ -25,21 +25,18 @@ html_strip = analyzer(
 class PolygonDocument(Document):
     """Book Elasticsearch document."""
 
-    id = fields.IntegerField(attr='id')
-
     name = fields.TextField(
         analyzer=html_strip,
         fields={
-            'raw': fields.TextField(analyzer='keyword')
+            'raw': fields.KeywordField(analyzer='keyword'),
         }
     )
-
-    price = fields.FloatField()
-    provider_name = fields.TextField()
+    provider_name = fields.KeywordField()
     geo = fields.GeoPointField(attr='geo_field_indexing')
 
     def prepare_provider_name(self, instance):
         return instance.provider.name
 
-    class Django(object):
+    class Django:
         model = Polygon
+        fields = ('price', )
