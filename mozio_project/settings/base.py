@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django_elasticsearch_dsl_drf',
     'providers',
     'polygons',
-    'search_indexes'
+    'search_indexes',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
