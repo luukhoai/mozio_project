@@ -1,21 +1,19 @@
 from django.test import TestCase
 import json
-from .models import Provider
+from providers.tests.factories import ProviderFactory
 
 
 class ProviderTest(TestCase):
 
     def setUp(self):
         self.url = '/providers/'
-        self.provider = Provider.objects.create(
-            name='Mozio', email='mozio@test.com',
-            phone_number='+8412345678', language='VN', currency='USD')
+        self.provider = ProviderFactory()
 
     def test_get_provider(self):
         response = self.client.get(
             self.url, content_type='application/json').json()
         assert len(response) == 1
-        assert response[0]['name'] == 'Mozio'
+        assert response[0]['name'] == self.provider.name
 
     def test_create_provivder(self):
         data = {
