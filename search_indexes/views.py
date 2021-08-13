@@ -17,7 +17,7 @@ from .serializers import PolygonDocumentSerializer
 
 class PolygonDocumentView(BaseDocumentViewSet):
     """
-        Search Polygon by filter geo data
+        Search Polygon by filter geo data. \
         Example: /search/polygon/?geo__geo_distance=100000km__12.04__-63.93
     """
 
