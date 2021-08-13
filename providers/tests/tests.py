@@ -71,4 +71,4 @@ class ProviderTest(TestCase):
         }
         response = self.client.post(
             self.url, json.dumps(data), content_type='application/json').json()
-        assert response['name'][0] == 'provider with this name already exists'
+        assert response['name'][0] == 'provider with this name already exists.'
