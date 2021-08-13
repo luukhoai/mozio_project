@@ -33,7 +33,7 @@ class PolygonTest(TestCase):
         assert response['geo'] == {"type": "Point", "coordinates": [1.2, 2.3]}
 
     @patch('django_elasticsearch_dsl.documents.bulk', return_value=None)
-    def test_update_provider(self):
+    def test_update_polygonr(self, *args):
         data = {
             'name': 'Test2',
             'price': 0.8,
@@ -46,7 +46,7 @@ class PolygonTest(TestCase):
         assert response['name'] == 'Test2'
 
     @patch('django_elasticsearch_dsl.documents.bulk', return_value=None)
-    def test_delete_provider(self):
+    def test_delete_polygon(self, *args):
         response = self.client.delete(
             '{}{}/'.format(self.url, self.polygon.slug),
             content_type='application/json')
@@ -61,7 +61,7 @@ class PolygonTest(TestCase):
         }
         response = self.client.post(
             self.url, json.dumps(data), content_type='application/json').json()
-        assert response['geo'] == 'Geo is invalid'
+        assert response['geo'][0] == 'Geo is invalid'
 
     def test_unique_name_provider_id(self):
         data = {
