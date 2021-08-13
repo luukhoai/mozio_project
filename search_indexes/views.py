@@ -33,17 +33,17 @@ class PolygonDocumentView(BaseDocumentViewSet):
     ]
     # Define search fields
     search_fields = (
-        'price',
+        'name',
     )
     # Define filter fields
     filter_fields = {
-        'price': 'price'
+        'name': 'name.raw'
     }
     # Define ordering fields
     ordering_fields = {
-        'price': 'price'
+        'name': 'name.raw'
     }
-    ordering = ('price',)
+    ordering = ('name',)
     geo_spatial_filter_fields = {
         'geo': {
             'lookups': [
