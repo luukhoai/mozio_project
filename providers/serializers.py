@@ -6,4 +6,4 @@ class ProviderSerializer(ModelSerializer):
 
     class Meta:
         model = Provider
-        fields = '__all__'
+        fields = ('name', 'email', 'phone_number', 'language', 'currency')
