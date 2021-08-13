@@ -28,7 +28,7 @@ class PolygonDocument(Document):
     name = fields.TextField(
         analyzer=html_strip,
         fields={
-            'raw': fields.KeywordField(analyzer='keyword'),
+            'raw': fields.KeywordField(),
         }
     )
     provider_name = fields.KeywordField()
