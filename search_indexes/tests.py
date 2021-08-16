@@ -1,10 +1,6 @@
 from django.test import TestCase
-from unittest.mock import patch
 from providers.tests.factories import ProviderFactory
 from polygons.tests.factories import PolygonFactory
-from search_indexes.documents.polygon import PolygonDocument
-from polygons.models import Polygon
-from providers.models import Provider
 
 
 class SearchTest(TestCase):
