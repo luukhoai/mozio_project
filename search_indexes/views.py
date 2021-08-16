@@ -6,16 +6,17 @@ from django_elasticsearch_dsl_drf.filter_backends import (
     IdsFilterBackend,
     OrderingFilterBackend,
     DefaultOrderingFilterBackend,
-    SearchFilterBackend,
+    CompoundSearchFilterBackend,
+    GeoSpatialFilteringFilterBackend
 )
-from django_elasticsearch_dsl_drf.viewsets import BaseDocumentViewSet
+from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
 from django_elasticsearch_dsl_drf.pagination import PageNumberPagination
 
 from .documents.polygon import PolygonDocument
 from .serializers import PolygonDocumentSerializer
 
 
-class PolygonDocumentView(BaseDocumentViewSet):
+class PolygonDocumentView(DocumentViewSet):
     """
         Search Polygon by filter geo data. \
         Example: /search/polygon/?geo__geo_distance=100000km__12.04__-63.93
@@ -29,7 +30,8 @@ class PolygonDocumentView(BaseDocumentViewSet):
         IdsFilterBackend,
         OrderingFilterBackend,
         DefaultOrderingFilterBackend,
-        SearchFilterBackend,
+        CompoundSearchFilterBackend,
+        GeoSpatialFilteringFilterBackend
     ]
     # Define search fields
     search_fields = (
